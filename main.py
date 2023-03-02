@@ -3,21 +3,46 @@
 import csv
 import requests
 import xml.etree.ElementTree as ET
+import matplotlib.pyplot as plt
+
+
 
 def tryAnother():
     import xmltodict
     import pprint
 
     # Open the file and read the contents
-    with open('two.xml', 'r', encoding='utf-8') as file:
+
+
+    with open('JS-002 (55pF)_20221128091004.result.xml', 'r', encoding='utf-8') as file:
         my_xml = file.read()
 
     # Use xmltodict to parse and convert
     # the XML document
     my_dict = xmltodict.parse(my_xml)
-
+    x=[]
+    y=[]
+    i=0
     # Print the dictionary
-    pprint.pprint(my_dict, indent=2)
+    pprint.pprint(len(my_dict['result']['dataSection']['res'][9]['waveForm']['waveformContainer'][0]['rawWaveForm']['dp']), indent=2)
+    #print((my_dict['result']['dataSection']))
+    for i in range(len((my_dict['result']['dataSection']['res'][9]['waveForm']['waveformContainer'][0]['rawWaveForm']['dp']))):
+        y.append(my_dict['result']['dataSection']['res'][9]['waveForm']['waveformContainer'][0]['rawWaveForm']['dp'][i]['@y'])
+        x.append(my_dict['result']['dataSection']['res'][9]['waveForm']['waveformContainer'][0]['rawWaveForm']['dp'][i]['@x'])
+        #x.append(i)
+        #print(i)
+
+
+    print(x)
+    print(y)
+    plt.scatter(x,y)
+    #plt.yscale('linear')
+    plt.xlabel('Over time')
+    plt.ylabel("Pulses")
+    plt.title("Pulse WaveForm")
+    #plt.grid()
+    plt.show()
+
 def tryThis():
 
 # Passing the path of the
