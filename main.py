@@ -27,16 +27,21 @@ def tryAnother():
     pprint.pprint(len(my_dict['result']['dataSection']['res'][9]['waveForm']['waveformContainer'][0]['rawWaveForm']['dp']), indent=2)
     #print((my_dict['result']['dataSection']))
     for i in range(len((my_dict['result']['dataSection']['res'][9]['waveForm']['waveformContainer'][0]['rawWaveForm']['dp']))):
-        y.append(my_dict['result']['dataSection']['res'][9]['waveForm']['waveformContainer'][0]['rawWaveForm']['dp'][i]['@y'])
-        x.append(my_dict['result']['dataSection']['res'][9]['waveForm']['waveformContainer'][0]['rawWaveForm']['dp'][i]['@x'])
+        y.append(float(my_dict['result']['dataSection']['res'][9]['waveForm']['waveformContainer'][0]['rawWaveForm']['dp'][i]['@y']))
+        x.append(float(my_dict['result']['dataSection']['res'][9]['waveForm']['waveformContainer'][0]['rawWaveForm']['dp'][i]['@x']))
         #x.append(i)
         #print(i)
 
 
     print(x)
     print(y)
-    plt.scatter(x,y)
+    #plt.scatter(x, y, label="stars", color="green",
+     #           marker="*", s=30)
     #plt.yscale('linear')
+
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
+
     plt.xlabel('Over time')
     plt.ylabel("Pulses")
     plt.title("Pulse WaveForm")
